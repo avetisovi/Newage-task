@@ -2,15 +2,46 @@
   <div class="signIn__wrapper">
     <div class="signIn__content">
       <h1 class="signIn__title">Sign In</h1>
-      <input placeholder="Login" class="signIn__input" type="text" />
-      <input placeholder="Password" class="signIn__input" type="password" />
-      <button class="signIn__btn">Sign In!</button>
+      <input
+        v-bind:value="login"
+        @input="setLogin($event.target.value)"
+        placeholder="Login"
+        class="signIn__input"
+        type="text"
+      />
+      <input
+        v-bind:value="password"
+        @input="setPassword($event.target.value)"
+        :model-value="password"
+        @update:model-value="setPassword"
+        placeholder="Password"
+        class="signIn__input"
+        type="password"
+      />
+      <button @click="signIn" class="signIn__btn">Sign In!</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapState, mapMutations, mapActions } from 'vuex';
+export default {
+  methods: {
+    ...mapMutations({
+      setLogin: 'auth/setLogin',
+      setPassword: 'auth/setPassword'
+    }),
+    ...mapActions({
+      signIn: 'auth/signIn'
+    })
+  },
+  computed: {
+    ...mapState({
+      login: (state) => state.auth.login,
+      password: (state) => state.auth.password
+    })
+  }
+};
 </script>
 
 <style lang="scss" scoped>
