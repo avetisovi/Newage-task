@@ -1,9 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import SignIn from '@/pages/SignIn';
+import SignedIn from '@/pages/SignedIn';
 
 Vue.use(VueRouter);
 
-const routes = [];
+const routes = [
+  { path: '/', component: SignIn },
+  { path: '/sports', component: SignedIn }
+];
 
 const router = new VueRouter({
   mode: 'history',
