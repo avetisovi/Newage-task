@@ -54,6 +54,8 @@ export const authModule = {
     signOut({ commit }) {
       commit('setAuth', false);
       commit('setToken', '');
+      commit('setLogin', '');
+      commit('setPassword', '');
       router.push('/');
     }
   }

@@ -1,11 +1,16 @@
 <template lang="">
-  <div>
-    <div>you are signed in</div>
-  </div>
+  <section class="sports__wrapper">
+    <div class="container">
+      <div class="sports__inner">
+        <SportsList v-if="isAuth" />
+      </div>
+    </div>
+  </section>
 </template>
 <script>
 import router from '@/router';
 import { mapState, mapActions } from 'vuex';
+import SportsList from '@/components/SportsList';
 export default {
   // redirecting to SignIn
   computed: {
@@ -17,15 +22,19 @@ export default {
   mounted() {
     if (!this.isAuth) {
       router.push('/');
-    } else {
-      this.fetchSports();
     }
   },
   methods: {
     ...mapActions({
       fetchSports: 'sports/fetchSports'
     })
-  }
+  },
+  components: { SportsList }
 };
 </script>
-<style lang=""></style>
+<style lang="scss">
+li {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+</style>

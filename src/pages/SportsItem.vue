@@ -1,0 +1,33 @@
+<template>
+  <div>{{ singleSport.n }}</div>
+</template>
+
+<script>
+import { mapGetters, mapMutations, mapState } from 'vuex';
+import router from '@/router';
+export default {
+  computed: {
+    ...mapState({
+      isAuth: (state) => state.auth.isAuth,
+      sports: (state) => state.sports.sportsArr
+    }),
+    ...mapGetters({
+      singleSport: 'sports/singleSport'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      setSlug: 'sports/setSlug'
+    })
+  },
+  mounted() {
+    if (!this.isAuth) {
+      router.push('/');
+    } else {
+      this.setSlug(this.$route.params.slug);
+    }
+  }
+};
+</script>
+
+<style lang="scss"></style>

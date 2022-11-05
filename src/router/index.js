@@ -2,12 +2,14 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import SignIn from '@/pages/SignIn';
 import SportsPage from '@/pages/SportsPage';
+import SportsItem from '@/pages/SportsItem';
 
 Vue.use(VueRouter);
 
 const routes = [
   { path: '/', component: SignIn },
-  { path: '/sports', component: SportsPage }
+  { path: '/sports', component: SportsPage },
+  { path: '/sports/:slug', component: SportsItem }
 ];
 
 const router = new VueRouter({

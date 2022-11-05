@@ -1,11 +1,15 @@
 export const sportsModule = {
   namespaced: true,
   state: () => ({
-    sportsArr: []
+    sportsArr: [],
+    slug: ''
   }),
   mutations: {
     setSports(state, arr) {
       state.sportsArr = arr;
+    },
+    setSlug(state, str) {
+      state.slug = str;
     }
   },
   actions: {
@@ -23,6 +27,14 @@ export const sportsModule = {
 
       const response = await request.json();
       commit('setSports', response);
+    }
+  },
+  getters: {
+    singleSport(state) {
+      if (state.slug && state.sportsArr.length) {
+        return state.sportsArr.find((obj) => obj.c === state.slug);
+      }
+      return { n: '' };
     }
   }
 };
