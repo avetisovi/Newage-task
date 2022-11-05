@@ -1,3 +1,5 @@
+import router from '@/router';
+
 export const authModule = {
   namespaced: true,
   state: () => ({
@@ -41,13 +43,18 @@ export const authModule = {
 
         if (response.ok) {
           const result = await response.json();
-          console.log(result);
           commit('setAuth', response.ok);
           commit('setToken', result.token);
+          router.push('/sports');
         }
       } catch (error) {
         alert(error);
       }
+    },
+    signOut({ commit }) {
+      commit('setAuth', false);
+      commit('setToken', '');
+      router.push('/');
     }
   }
 };

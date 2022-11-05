@@ -1,40 +1,22 @@
 <template>
   <div id="app">
+    <SignedInHeader v-if="isAuth" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import router from './router';
+import SignedInHeader from './components/SignedInHeader.vue';
 
 export default {
+  components: { SignedInHeader },
+
   // isAuth initialisation
   computed: {
     ...mapState({
       isAuth: (state) => state.auth.isAuth
     })
-  },
-
-  // redirecting to SignIn and SignedIn
-  mounted() {
-    if (!this.isAuth) {
-      router.push('/');
-    }
-  },
-  watch: {
-    isAuth(newVal) {
-      if (newVal) {
-        router.push('/sports');
-      } else {
-        router.push('/');
-      }
-    },
-    $route(to) {
-      if (to.path === '/' && this.isAuth) {
-        router.push('/sports');
-      }
-    }
   }
 };
 </script>

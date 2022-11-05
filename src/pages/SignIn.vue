@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import router from '@/router';
 import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
   methods: {
@@ -38,8 +39,14 @@ export default {
   computed: {
     ...mapState({
       login: (state) => state.auth.login,
-      password: (state) => state.auth.password
+      password: (state) => state.auth.password,
+      isAuth: (state) => state.auth.isAuth
     })
+  },
+  mounted() {
+    if (this.isAuth) {
+      router.push('/sports');
+    }
   }
 };
 </script>
