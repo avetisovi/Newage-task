@@ -33,7 +33,5 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  &__title {
-  }
 }
 </style>
