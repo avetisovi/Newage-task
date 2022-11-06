@@ -34,7 +34,6 @@ export default {
     if (localStorage.getItem('token')) {
       this.setAuth(true);
       this.setToken(localStorage.getItem('token'));
-      this.setSports(JSON.parse(localStorage.getItem('sports')));
     } else {
       if (this.$route.path !== '/') {
         router.push('/');
