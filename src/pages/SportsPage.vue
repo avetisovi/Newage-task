@@ -1,5 +1,5 @@
 <template lang="">
-  <section class="sports__wrapper">
+  <section class="sports__wrapper signedIn">
     <div class="container">
       <div class="sports__inner">
         <SportsList v-if="isAuth" />

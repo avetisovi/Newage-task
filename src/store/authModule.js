@@ -49,6 +49,8 @@ export const authModule = {
           commit('setToken', result.token);
           localStorage.setItem('token', result.token);
           router.push('/sports');
+        } else {
+          alert(`Failed to log in, Error${response.status}`);
         }
 
         // ToDo: display something if not valid

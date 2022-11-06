@@ -62,4 +62,8 @@ body {
   padding: 0 15px;
   margin: 0 auto;
 }
+
+.signedIn {
+  padding-top: 110px;
+}
 </style>

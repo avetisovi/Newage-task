@@ -1,5 +1,7 @@
 <template>
-  <div>{{ singleSport.n }}</div>
+  <section class="signedIn">
+    <div>{{ singleSport.n }}</div>
+  </section>
 </template>
 
 <script>

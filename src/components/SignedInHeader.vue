@@ -25,6 +25,13 @@ export default {
 .header {
   padding: 30px 0;
 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  
+  background-color: #fafafa;
+
   &__inner {
     display: flex;
     justify-content: space-between;
