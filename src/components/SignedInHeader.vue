@@ -1,15 +1,17 @@
 <template>
   <header class="header">
-    <div class="container">
-      <div class="header__inner">
-        <button class="header__btn" @click="signOut">Sign Out</button>
-      </div>
+    <div class="container header__inner">
+      <router-link to="/sports"
+        ><img class="logo__img" src="@/images/logo.svg"
+      /></router-link>
+      <button class="header__btn" @click="signOut">Sign Out</button>
     </div>
   </header>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+
 export default {
   methods: {
     ...mapActions({
@@ -25,7 +27,7 @@ export default {
 
   &__inner {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
   &__btn {
     color: #212121;
@@ -38,5 +40,10 @@ export default {
 
     cursor: pointer;
   }
+}
+
+.logo__img {
+  width: 220px;
+  height: 50px;
 }
 </style>
