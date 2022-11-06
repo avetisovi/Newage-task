@@ -1,19 +1,12 @@
 <template>
-  <ul>
-    <li
-      v-for="sport in sports"
-      :sport="sport"
-      :key="sport.id"
-      @click="openPost(sport.c)"
-    >
-      {{ sport.id }}. {{ sport.n }}
-    </li>
+  <ul class="sports__list">
+    <SportsItem v-for="sport in sports" :sport="sport" :key="sport.id" />
   </ul>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import router from '@/router';
+import SportsItem from './SportsItem';
 export default {
   computed: {
     ...mapState({
@@ -29,12 +22,16 @@ export default {
   methods: {
     ...mapActions({
       fetchSports: 'sports/fetchSports'
-    }),
-    openPost(slug) {
-      router.push(`/sports/${slug}`);
-    }
-  }
+    })
+  },
+  components: { SportsItem }
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.sports__list {
+  list-style: none;
+  padding: 30px 0;
+  margin: 0;
+}
+</style>
