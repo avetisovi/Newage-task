@@ -17,7 +17,8 @@ import router from '@/router';
 export default {
   computed: {
     ...mapState({
-      sports: (state) => state.sports.sportsArr
+      sports: (state) => state.sports.sportsArr,
+      token: (state) => state.auth.authToken
     })
   },
 

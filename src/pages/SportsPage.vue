@@ -8,7 +8,6 @@
   </section>
 </template>
 <script>
-import router from '@/router';
 import { mapState, mapActions } from 'vuex';
 import SportsList from '@/components/SportsList';
 export default {
@@ -18,11 +17,6 @@ export default {
       isAuth: (state) => state.auth.isAuth,
       sports: (state) => state.sports.sportsArr
     })
-  },
-  mounted() {
-    if (!this.isAuth) {
-      router.push('/');
-    }
   },
   methods: {
     ...mapActions({

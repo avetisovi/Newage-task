@@ -2,23 +2,25 @@
   <div class="signIn__wrapper">
     <div class="signIn__content">
       <h1 class="signIn__title">Sign In</h1>
-      <input
-        v-bind:value="login"
-        @input="setLogin($event.target.value)"
-        placeholder="Login"
-        class="signIn__input"
-        type="text"
-      />
-      <input
-        v-bind:value="password"
-        @input="setPassword($event.target.value)"
-        :model-value="password"
-        @update:model-value="setPassword"
-        placeholder="Password"
-        class="signIn__input"
-        type="password"
-      />
-      <button @click="signIn" class="signIn__btn">Sign In!</button>
+      <form class="signIn__form" @submit.prevent>
+        <input
+          v-bind:value="login"
+          @input="setLogin($event.target.value)"
+          placeholder="Login"
+          class="signIn__input"
+          type="text"
+        />
+        <input
+          v-bind:value="password"
+          @input="setPassword($event.target.value)"
+          :model-value="password"
+          @update:model-value="setPassword"
+          placeholder="Password"
+          class="signIn__input"
+          type="password"
+        />
+        <button @click="signIn" class="signIn__btn">Sign In!</button>
+      </form>
     </div>
   </div>
 </template>
@@ -44,7 +46,7 @@ export default {
     })
   },
   mounted() {
-    if (this.isAuth) {
+    if (localStorage.getItem('token')) {
       router.push('/sports');
     }
   }
@@ -62,10 +64,6 @@ export default {
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-
     background-color: white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: 10px;
@@ -73,8 +71,14 @@ export default {
     padding: 50px 70px;
   }
 
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
   &__title {
-    margin: 0 0 10px;
+    margin: 0 0 40px;
     padding-bottom: 10px;
     border-bottom: 1px solid #525252;
   }

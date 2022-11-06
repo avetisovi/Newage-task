@@ -26,6 +26,7 @@ export const authModule = {
   actions: {
     async signIn({ state, commit }) {
       try {
+        // send request to server
         const response = await fetch(
           'https://paridirect-ussd.dev.smrtsrc.io/api/auth/signin',
           {
@@ -41,12 +42,16 @@ export const authModule = {
           }
         );
 
+        // sign in if valid
         if (response.ok) {
           const result = await response.json();
           commit('setAuth', response.ok);
           commit('setToken', result.token);
+          localStorage.setItem('token', result.token);
           router.push('/sports');
         }
+
+        // ToDo: display something if not valid
       } catch (error) {
         alert(error);
       }
@@ -56,6 +61,9 @@ export const authModule = {
       commit('setToken', '');
       commit('setLogin', '');
       commit('setPassword', '');
+
+      localStorage.setItem('token', '');
+      localStorage.setItem('sports', '');
       router.push('/');
     }
   }

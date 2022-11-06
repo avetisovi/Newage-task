@@ -6,8 +6,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import SignedInHeader from './components/SignedInHeader.vue';
+import router from './router';
 
 export default {
   components: { SignedInHeader },
@@ -17,6 +18,28 @@ export default {
     ...mapState({
       isAuth: (state) => state.auth.isAuth
     })
+  },
+
+  // mutations
+  methods: {
+    ...mapMutations({
+      setToken: 'auth/setToken',
+      setAuth: 'auth/setAuth',
+      setSports: 'sports/setSports'
+    })
+  },
+
+  mounted() {
+    // if localStorage has data store it, else redirect to SignIn page
+    if (localStorage.getItem('token')) {
+      this.setAuth(true);
+      this.setToken(localStorage.getItem('token'));
+      this.setSports(JSON.parse(localStorage.getItem('sports')));
+    } else {
+      if (this.$route.path !== '/') {
+        router.push('/');
+      }
+    }
   }
 };
 </script>

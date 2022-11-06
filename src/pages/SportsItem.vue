@@ -4,7 +4,6 @@
 
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex';
-import router from '@/router';
 export default {
   computed: {
     ...mapState({
@@ -21,11 +20,7 @@ export default {
     })
   },
   mounted() {
-    if (!this.isAuth) {
-      router.push('/');
-    } else {
-      this.setSlug(this.$route.params.slug);
-    }
+    this.setSlug(this.$route.params.slug);
   }
 };
 </script>
