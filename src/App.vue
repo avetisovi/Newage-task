@@ -45,6 +45,10 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   background-color: #fafafa;

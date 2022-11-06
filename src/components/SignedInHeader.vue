@@ -29,7 +29,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  
+
   background-color: #fafafa;
 
   &__inner {
@@ -50,7 +50,16 @@ export default {
 }
 
 .logo__img {
-  width: 220px;
+  width: auto;
   height: 50px;
+}
+
+@media (max-width: 500px) {
+  .logo__img {
+    height: 40px;
+  }
+  .header {
+    padding: 20px 0;
+  }
 }
 </style>

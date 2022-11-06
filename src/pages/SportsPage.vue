@@ -30,4 +30,10 @@ export default {
 .sports__wrapper {
   padding-top: 110px;
 }
+
+@media (max-width: 500px) {
+  .sports__wrapper {
+    padding-top: 80px;
+  }
+}
 </style>

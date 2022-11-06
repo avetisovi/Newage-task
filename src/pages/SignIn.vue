@@ -101,6 +101,7 @@ export default {
   &__form-footer {
     display: flex;
     align-items: center;
+    gap: 20px;
   }
   &__btn {
     margin-left: auto;
@@ -125,6 +126,39 @@ export default {
     font-size: 1.1rem;
     color: #f00;
     font-weight: 600;
+  }
+}
+
+@media (max-width: 768px) {
+  .signIn {
+    &__content {
+      width: 100vh;
+      height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &__form {
+      flex: 1 1 0;
+    }
+    &__form-footer {
+      margin-top: auto;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .signIn {
+    &__input {
+      width: 100%;
+    }
+    &__content {
+      padding: 50px 30px;
+    }
+    &__btn {
+      min-width: 105px;
+    }
   }
 }
 </style>
