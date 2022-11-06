@@ -1,6 +1,6 @@
 <template>
-  <section class="signedIn">
-    <div>{{ singleSport.n }}</div>
+  <section class="singleSport">
+    <h1 class="singleSport__title">{{ singleSport.n }}</h1>
   </section>
 </template>
 
@@ -27,4 +27,13 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.singleSport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  &__title {
+  }
+}
+</style>

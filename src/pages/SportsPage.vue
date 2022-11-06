@@ -27,8 +27,7 @@ export default {
 };
 </script>
 <style lang="scss">
-li {
-  margin-bottom: 20px;
-  font-size: 1.1rem;
+.sports__wrapper {
+  padding-top: 110px;
 }
 </style>
