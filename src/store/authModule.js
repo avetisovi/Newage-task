@@ -6,7 +6,8 @@ export const authModule = {
     isAuth: false,
     authToken: '',
     login: '',
-    password: ''
+    password: '',
+    valid: true
   }),
   mutations: {
     setLogin(state, str) {
@@ -20,6 +21,9 @@ export const authModule = {
     },
     setToken(state, str) {
       state.authToken = str;
+    },
+    setValid(state, bool) {
+      state.valid = bool;
     }
   },
   getters: {},
@@ -42,15 +46,19 @@ export const authModule = {
           }
         );
 
+        const result = await response.json();
+
         // sign in if valid
         if (response.ok) {
-          const result = await response.json();
           commit('setAuth', response.ok);
           commit('setToken', result.token);
           localStorage.setItem('token', result.token);
           router.push('/sports');
         } else {
-          alert(`Failed to log in, Error${response.status}`);
+          // display text if not
+          commit('setValid', false);
+          commit('setLogin', '');
+          commit('setPassword', '');
         }
 
         // ToDo: display something if not valid

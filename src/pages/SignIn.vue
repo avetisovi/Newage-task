@@ -2,8 +2,9 @@
   <div class="signIn__wrapper">
     <div class="signIn__content">
       <h1 class="signIn__title">Sign In</h1>
-      <form class="signIn__form" @submit.prevent>
+      <form class="signIn__form" @submit.prevent="signIn">
         <input
+          required
           v-bind:value="login"
           @input="setLogin($event.target.value)"
           placeholder="Login"
@@ -11,6 +12,7 @@
           type="text"
         />
         <input
+          required
           v-bind:value="password"
           @input="setPassword($event.target.value)"
           :model-value="password"
@@ -19,7 +21,10 @@
           class="signIn__input"
           type="password"
         />
-        <button @click="signIn" class="signIn__btn">Sign In!</button>
+        <div class="signIn__form-footer">
+          <p v-if="!valid" class="signIn__err">Please enter valid data!</p>
+          <button class="signIn__btn">Sign In!</button>
+        </div>
       </form>
     </div>
   </div>
@@ -42,7 +47,8 @@ export default {
     ...mapState({
       login: (state) => state.auth.login,
       password: (state) => state.auth.password,
-      isAuth: (state) => state.auth.isAuth
+      isAuth: (state) => state.auth.isAuth,
+      valid: (state) => state.auth.valid
     })
   },
   mounted() {
@@ -92,8 +98,12 @@ export default {
 
     font-size: 1.1rem;
   }
+  &__form-footer {
+    display: flex;
+    align-items: center;
+  }
   &__btn {
-    align-self: flex-end;
+    margin-left: auto;
     padding: 15px 20px;
 
     font-size: 1.1rem;
@@ -109,6 +119,12 @@ export default {
       color: white;
       background: linear-gradient(90deg, #dd25fe, #0075ff 103.07%);
     }
+  }
+  &__err {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #f00;
+    font-weight: 600;
   }
 }
 </style>
