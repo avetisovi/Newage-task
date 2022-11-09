@@ -4,7 +4,7 @@ export const authModule = {
   namespaced: true,
   state: () => ({
     isAuth: false,
-    authToken: '',
+    authToken: '', // FIXME: why empty string and not null?
     login: '',
     password: '',
     valid: true
@@ -26,12 +26,19 @@ export const authModule = {
       state.valid = bool;
     }
   },
-  getters: {},
+  getters: {
+    getIsAuth(state) {
+      return state.isAuth;
+    },
+    getToken(state) {
+      return state.authToken || localStorage.getItem('token');
+    }
+  },
   actions: {
     async signIn({ state, commit }) {
       try {
         // send request to server
-        const response = await fetch(
+        const response = await fetch( // FIXME: what about moving base url in constants?
           'https://paridirect-ussd.dev.smrtsrc.io/api/auth/signin',
           {
             method: 'POST',
@@ -52,7 +59,7 @@ export const authModule = {
         if (response.ok) {
           commit('setAuth', response.ok);
           commit('setToken', result.token);
-          localStorage.setItem('token', result.token);
+          localStorage.setItem('token', result.token); // FIXME: Must be moved inside the mutation of token.
           router.push('/sports');
         } else {
           // display text if not
@@ -60,8 +67,6 @@ export const authModule = {
           commit('setLogin', '');
           commit('setPassword', '');
         }
-
-        // ToDo: display something if not valid
       } catch (error) {
         alert(error);
       }
@@ -73,7 +78,7 @@ export const authModule = {
       commit('setPassword', '');
 
       localStorage.setItem('token', '');
-      localStorage.setItem('sports', '');
+      localStorage.setItem('sports', ''); // FIXME: this must be the action in sports module.
       router.push('/');
     }
   }

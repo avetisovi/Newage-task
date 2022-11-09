@@ -9,7 +9,7 @@ import { mapGetters, mapMutations, mapState } from 'vuex';
 export default {
   computed: {
     ...mapState({
-      isAuth: (state) => state.auth.isAuth,
+      isAuth: (state) => state.auth.isAuth, // FIXME: these should be getters
       sports: (state) => state.sports.sportsArr
     }),
     ...mapGetters({

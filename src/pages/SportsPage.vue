@@ -1,4 +1,4 @@
-<template lang="">
+<template lang=""> <!-- FIXME: there must be no `lang` attribute for the template -->
   <section class="sports__wrapper signedIn">
     <div class="container">
       <div class="sports__inner">
@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchSports: 'sports/fetchSports'
+      fetchSports: 'sports/fetchSports' // FIXME: unnecessary code
     })
   },
   components: { SportsList }

@@ -15,12 +15,12 @@ export const sportsModule = {
   actions: {
     async fetchSports({ rootState, commit }) {
       // fetch from localStorage if there are sports
-      if (localStorage.getItem('sports')) {
+      if (localStorage.getItem('sports')) { // FIXME: do you know the difference between assigning and referencing?
         commit('setSports', JSON.parse(localStorage.getItem('sports')));
       } else {
         //fetch from server
-        const token = rootState.auth.authToken;
-        const request = await fetch(
+        const token = rootState.auth.authToken; // FIXME: this should be a getter.
+        const request = await fetch( // FIXME: what about moving base url in constants?
           'https://paridirect-ussd.dev.smrtsrc.io/api/sports-book/sports?culture=en',
           {
             headers: {
@@ -34,7 +34,7 @@ export const sportsModule = {
 
         // store fetched data
         commit('setSports', response);
-        localStorage.setItem('sports', JSON.stringify(response));
+        localStorage.setItem('sports', JSON.stringify(response)); // FIXME: this line must go inside the mutation
       }
     }
   },

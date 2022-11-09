@@ -31,9 +31,11 @@ export default {
 
   mounted() {
     // if localStorage has data store it, else redirect to SignIn page
-    if (localStorage.getItem('token')) {
+    // FIXME: do you know the difference between assigning and referencing?
+    const token = localStorage.getItem('token');
+    if (token) {
       this.setAuth(true);
-      this.setToken(localStorage.getItem('token'));
+      this.setToken(token);
     } else {
       if (this.$route.path !== '/') {
         router.push('/');

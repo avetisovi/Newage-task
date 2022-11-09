@@ -10,8 +10,8 @@ import SportsItem from './SportsItem';
 export default {
   computed: {
     ...mapState({
-      sports: (state) => state.sports.sportsArr,
-      token: (state) => state.auth.authToken
+      sports: (state) => state.sports.sportsArr, // FIXME: use getter instead of state.
+      token: (state) => state.auth.authToken, // FIXME: use getter instead of state.
     })
   },
 
