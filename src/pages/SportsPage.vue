@@ -1,31 +1,27 @@
-<template lang=""> <!-- FIXME: there must be no `lang` attribute for the template -->
+<template>
   <section class="sports__wrapper signedIn">
     <div class="container">
       <div class="sports__inner">
-        <SportsList v-if="isAuth" />
+        <SportsList v-if="getIsAuth" />
       </div>
     </div>
   </section>
 </template>
+
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 import SportsList from '@/components/SportsList';
+
 export default {
-  // redirecting to SignIn
   computed: {
-    ...mapState({
-      isAuth: (state) => state.auth.isAuth,
-      sports: (state) => state.sports.sportsArr
-    })
-  },
-  methods: {
-    ...mapActions({
-      fetchSports: 'sports/fetchSports' // FIXME: unnecessary code
+    ...mapGetters({
+      getIsAuth: 'auth/getIsAuth'
     })
   },
   components: { SportsList }
 };
 </script>
+
 <style lang="scss">
 .sports__wrapper {
   padding-top: 110px;

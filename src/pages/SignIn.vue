@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import router from '@/router';
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 export default {
   methods: {
@@ -53,11 +52,6 @@ export default {
     ...mapGetters({
       getToken: 'auth/getToken'
     })
-  },
-  mounted() {
-    if (this.getToken) { // FIXME: the check must be done using the getter from store.
-      router.push('/sports');
-    }
   }
 };
 </script>

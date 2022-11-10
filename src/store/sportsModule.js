@@ -7,44 +7,61 @@ export const sportsModule = {
   mutations: {
     setSports(state, arr) {
       state.sportsArr = arr;
+      arr.length
+        ? localStorage.setItem('sports', JSON.stringify(arr))
+        : localStorage.setItem('sports', '');
     },
     setSlug(state, str) {
       state.slug = str;
     }
   },
   actions: {
-    async fetchSports({ rootState, commit }) {
-      // fetch from localStorage if there are sports
-      if (localStorage.getItem('sports')) { // FIXME: do you know the difference between assigning and referencing?
-        commit('setSports', JSON.parse(localStorage.getItem('sports')));
-      } else {
-        //fetch from server
-        const token = rootState.auth.authToken; // FIXME: this should be a getter.
-        const request = await fetch( // FIXME: what about moving base url in constants?
-          'https://paridirect-ussd.dev.smrtsrc.io/api/sports-book/sports?culture=en',
-          {
+    async fetchSports({ getters, commit, rootState }) {
+      try {
+        if (!getters.getSports.legnth) {
+          //fetch request options
+          const token = this.getters['auth/getToken'];
+          const url = `${rootState.baseUrl}/sports-book/sports?culture=en`;
+
+          const fetchOptions = {
             headers: {
               Accept: '*/*',
               Authorization: token
             }
-          }
-        );
+          };
 
-        const response = await request.json();
+          // send fetch request
+          const request = await fetch(url, fetchOptions);
 
-        // store fetched data
-        commit('setSports', response);
-        localStorage.setItem('sports', JSON.stringify(response)); // FIXME: this line must go inside the mutation
+          const response = await request.json();
+
+          // store fetched data
+          commit('setSports', response);
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
   },
   getters: {
     // get single post of SinglePost page
-    singleSport(state) {
-      if (state.slug && state.sportsArr.length) {
-        return state.sportsArr.find((obj) => obj.c === state.slug);
+    singleSport(state, getters) {
+      if (state.slug && getters.getSports.length) {
+        return getters.getSports.find((obj) => obj.c === state.slug);
       }
       return { n: '' };
+    },
+    getSports(state) {
+      const localStorageSports = localStorage.getItem('sports');
+
+      // return sports from state or localStorage or empty array
+      if (state.sportsArr.length) {
+        return state.sportsArr;
+      } else if (localStorageSports) {
+        return JSON.parse(localStorageSports);
+      } else {
+        return [];
+      }
     }
   }
 };

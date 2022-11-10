@@ -1,45 +1,27 @@
 <template>
   <div id="app">
-    <SignedInHeader v-if="isAuth" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import SignedInHeader from './components/SignedInHeader.vue';
-import router from './router';
+import { mapMutations } from 'vuex';
 
 export default {
-  components: { SignedInHeader },
-
-  // isAuth initialisation
-  computed: {
-    ...mapState({
-      isAuth: (state) => state.auth.isAuth
-    })
-  },
-
   // mutations
   methods: {
     ...mapMutations({
       setToken: 'auth/setToken',
-      setAuth: 'auth/setAuth',
-      setSports: 'sports/setSports'
+      setAuth: 'auth/setAuth'
     })
   },
 
   mounted() {
     // if localStorage has data store it, else redirect to SignIn page
-    // FIXME: do you know the difference between assigning and referencing?
-    const token = localStorage.getItem('token');
-    if (token) {
+    const localStorageToken = localStorage.getItem('token');
+    if (localStorageToken) {
       this.setAuth(true);
-      this.setToken(token);
-    } else {
-      if (this.$route.path !== '/') {
-        router.push('/');
-      }
+      this.setToken(localStorageToken);
     }
   }
 };
