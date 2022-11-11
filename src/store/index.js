@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    string: 'str'
+    baseUrl: 'https://paridirect-ussd.dev.smrtsrc.io/api'
   },
   getters: {},
   mutations: {},

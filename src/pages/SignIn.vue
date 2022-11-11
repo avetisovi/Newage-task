@@ -31,8 +31,7 @@
 </template>
 
 <script>
-import router from '@/router';
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 export default {
   methods: {
     ...mapMutations({
@@ -49,12 +48,10 @@ export default {
       password: (state) => state.auth.password,
       isAuth: (state) => state.auth.isAuth,
       valid: (state) => state.auth.valid
+    }),
+    ...mapGetters({
+      getToken: 'auth/getToken'
     })
-  },
-  mounted() {
-    if (localStorage.getItem('token')) {
-      router.push('/sports');
-    }
   }
 };
 </script>

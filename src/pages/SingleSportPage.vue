@@ -5,13 +5,9 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   computed: {
-    ...mapState({
-      isAuth: (state) => state.auth.isAuth,
-      sports: (state) => state.sports.sportsArr
-    }),
     ...mapGetters({
       singleSport: 'sports/singleSport'
     })

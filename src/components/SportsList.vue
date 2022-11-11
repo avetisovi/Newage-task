@@ -1,17 +1,16 @@
 <template>
   <ul class="sports__list">
-    <SportsItem v-for="sport in sports" :sport="sport" :key="sport.id" />
+    <SportsItem v-for="sport in getSports" :sport="sport" :key="sport.id" />
   </ul>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import SportsItem from './SportsItem';
 export default {
   computed: {
-    ...mapState({
-      sports: (state) => state.sports.sportsArr,
-      token: (state) => state.auth.authToken
+    ...mapGetters({
+      getSports: 'sports/getSports'
     })
   },
 
